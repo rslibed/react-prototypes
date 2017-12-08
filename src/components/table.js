@@ -8,23 +8,7 @@ const Table = () => {
             <th>Course</th>
             <th>Grade</th>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Augustine Cheng</td>
-                    <td>Photography 101</td>
-                    <td>98</td>
-                </tr>
-                <tr>
-                    <td>Ryan Libed</td>
-                    <td>React101</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>Johnny Pham</td>
-                    <td>Mechanical Engineering</td>
-                    <td>85</td>
-                </tr>
-            </tbody>
+            <tbody></tbody>
         </table>
     )
 }
