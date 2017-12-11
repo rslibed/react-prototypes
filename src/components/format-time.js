@@ -9,6 +9,13 @@ class FormatTime extends Component {
             sec: 0,
             ms: 0
         }
+        this.timerStyle = {
+            display: 'inline-block',
+            position: 'relative',
+            left: '50%',
+            transform: 'translate(-50%)',
+            width: '295px'
+        }
     }
     componentWillReceiveProps(nextProps) {
         const {elapsed} = nextProps;
@@ -24,7 +31,7 @@ class FormatTime extends Component {
     render () {
         const {hour, min, sec, ms} = this.state;
         return (
-            <div>{hour}:{min}:{sec}.{ms}</div>
+            <div style={this.timerStyle}>{hour}:{min}:{sec}.{ms}</div>
         );
     }
 }
