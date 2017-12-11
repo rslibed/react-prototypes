@@ -8,14 +8,15 @@ class Stopwatch extends Component {
             status: 'stopped',
             start: null,
             elapsed: 0,
-            lap: new Date().getTime();
+            lap: new Date().getTime()
+            laps: [0]
         };
         this.start = this.start.bind(this);
         this.stop = this.stop.bind(this);
         this.update = this.update.bind(this);
         this.reset = this.reset.bind(this);
+        this.lap = this.lap.bind(this);
     }
-
     start() {
         const {start, elapsed} = this.state;
         let newStart = new Date().getTime();
@@ -28,14 +29,12 @@ class Stopwatch extends Component {
         });
         setTimeout(this.update, 10);
     }
-
     stop() {
         this.setState({
             status: 'stopped',
             start: new Date().getTime()
         });
     }
-
     update() {
         const {start, status} = this.state;
         if (status === 'running') {
@@ -45,7 +44,6 @@ class Stopwatch extends Component {
             setTimeout(this.update, 10);
         }
     }
-
     reset() {
         this.setState({
             status: 'stopped',
@@ -53,13 +51,12 @@ class Stopwatch extends Component {
             elapsed: 0
         });
     }
-
     lap() {
-        const {lap} = this.state;
-        let lapTime = new Date.getTime();
-        this.setState({
-            lap: lapTime - start
-        });
+        let {elapsed: lastLap} = this.state;
+        // this.setState({
+        //     lap: elapsed - newLap
+        // });
+        console.log(lastLap / 1000);
     }
     render() {
         const {status, elapsed} = this.state;
