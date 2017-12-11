@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Time from './format-time';
 
 class Stopwatch extends Component {
     constructor (props) {
@@ -46,7 +47,7 @@ class Stopwatch extends Component {
         const {status, elapsed} = this.state;
         return (
             <div>
-                <h1>{elapsed}</h1>
+                <h1><Time elapsed={elapsed}/></h1>
                 <p>{status}</p>
                 <button onClick={this.start}>Start</button>
                 <button onClick={this.stop}>Stop</button>
