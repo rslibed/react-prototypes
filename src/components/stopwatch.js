@@ -12,7 +12,8 @@ class Stopwatch extends Component {
             lastItem: 0,
             lapTimes: [],
             currentLap: null,
-            numberOfLaps: 1
+            numberOfLaps: 1,
+            timeArray: [null]
         };
         this.start = this.start.bind(this);
         this.stop = this.stop.bind(this);
@@ -54,11 +55,12 @@ class Stopwatch extends Component {
             elapsed: 0,
             lastItem: 0,
             lapTimes: [],
-            numberOfLaps: 1
+            numberOfLaps: 1,
+            timeArray: []
         });
     }
     lap() {
-        const {start, status} = this.state;
+        const {start, status, timeArray, currentLap} = this.state;
         if (status !== 'running') {
             return;
         }
@@ -76,9 +78,14 @@ class Stopwatch extends Component {
             numberOfLaps: this.state.numberOfLaps + 1,
             currentLap: this.state.lapTimes[this.state.lapTimes.length-1]
         });
+        if (timeArray[0] === null) {
+            timeArray[0] = this.state.currentLap;
+        } else {
+            timeArray.push(currentLap);
+        }
     }
     render() {
-        const {elapsed, currentLap} = this.state;
+        const {elapsed, timeArray} = this.state;
         return (
             <div className="jumbotron">
                 <h1 className="display-3"><Time elapsed={elapsed}/></h1>
@@ -91,7 +98,7 @@ class Stopwatch extends Component {
                 </p>
                 <h4>Lap Times: </h4>
                 <div className="lap-container">
-                    <FormatLap lastItem={currentLap}/>
+                    <FormatLap timeArray={timeArray}/>
                 </div>
             </div>
         )

@@ -8,7 +8,7 @@ class FormatTime extends Component {
             min: 0,
             sec: 0,
             ms: 0
-        }
+        };
         this.timerStyle = {
             display: 'inline-block',
             position: 'relative',
