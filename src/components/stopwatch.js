@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Time from './format-time';
+import FormatLap from './format-lap';
 
 class Stopwatch extends Component {
     constructor(props) {
@@ -8,8 +9,10 @@ class Stopwatch extends Component {
             status: 'stopped',
             start: null,
             elapsed: 0,
-            lap: new Date().getTime()
-            laps: [0]
+            lastItem: 0,
+            lapTimes: [],
+            currentLap: null,
+            numberOfLaps: 1
         };
         this.start = this.start.bind(this);
         this.stop = this.stop.bind(this);
@@ -48,18 +51,34 @@ class Stopwatch extends Component {
         this.setState({
             status: 'stopped',
             start: null,
-            elapsed: 0
+            elapsed: 0,
+            lastItem: 0,
+            lapTimes: [],
+            numberOfLaps: 1
         });
     }
     lap() {
-        let {elapsed: lastLap} = this.state;
-        // this.setState({
-        //     lap: elapsed - newLap
-        // });
-        console.log(lastLap / 1000);
+        const {start, status} = this.state;
+        if (status !== 'running') {
+            return;
+        }
+        let lastLap = new Date().getTime();
+        if (this.state.lapTimes.length >= 1 && this.state.lapTimes !== []) {
+            let currentTime = new Date().getTime() - this.state.lastItem;
+            this.state.lastItem = currentTime;
+            this.state.lapTimes.push(currentTime);
+        } else {
+            this.state.lapTimes[0] = (lastLap - start);
+            this.state.lastItem = this.state.lapTimes[0];
+        }
+        this.setState({
+            lastItem: lastLap,
+            numberOfLaps: this.state.numberOfLaps + 1,
+            currentLap: this.state.lapTimes[this.state.lapTimes.length-1]
+        });
     }
     render() {
-        const {status, elapsed} = this.state;
+        const {elapsed, currentLap} = this.state;
         return (
             <div className="jumbotron">
                 <h1 className="display-3"><Time elapsed={elapsed}/></h1>
@@ -70,8 +89,9 @@ class Stopwatch extends Component {
                     <button className="btn btn-outline-warning mx-3" onClick={this.reset}>Reset</button>
                     <button className="btn btn-outline-primary mx-3" onClick={this.lap}>Lap</button>
                 </p>
+                <h4>Lap Times: </h4>
                 <div className="lap-container">
-                    <h4>Lap Times: </h4>
+                    <FormatLap lastItem={currentLap}/>
                 </div>
             </div>
         )
