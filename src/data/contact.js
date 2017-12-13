@@ -9,18 +9,18 @@ export default [
         firstName: 'Tirion',
         lastName: 'Fordring',
         phone: '(856)458-7412',
-        email: 'requireassistance@ashbringer.com',
+        email: 'ash@bringer.com',
     },
     {
         firstName: 'Garrosh',
         lastName: 'Hellscream',
         phone: '1(800)I-Will-Crush-You',
-        email: 'fieryaxe4life@2drop.com'
+        email: 'fieryaxe@2drop.com'
     },
     {
         firstName: 'Anduin',
         lastName: 'Wrynn',
         phone: '(408)777-7777',
-        email: 'bythelight@prieststilltrash.com'
+        email: 'prieststill@trash.com'
     },
 ];
