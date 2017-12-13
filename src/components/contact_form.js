@@ -21,12 +21,11 @@ class ContactForm extends Component {
         form[name] = value;
         this.setState({
            form: {...form}
-
         });
     }
     handleSubmit(e) {
         e.preventDefault();
-        console.log(this.state.form);
+        this.props.add(this.state.form);
     }
     render () {
         const {firstName, lastName, phone, email} = this.state.form;
