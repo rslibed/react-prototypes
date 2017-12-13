@@ -12,8 +12,8 @@ class Stopwatch extends Component {
             lastItem: 0,
             lapTimes: [],
             currentLap: null,
-            numberOfLaps: 1,
-            timeArray: [null]
+            timeArray: [],
+            lastTimeStamp: 0
         };
         this.start = this.start.bind(this);
         this.stop = this.stop.bind(this);
@@ -21,7 +21,7 @@ class Stopwatch extends Component {
         this.reset = this.reset.bind(this);
         this.lap = this.lap.bind(this);
     }
-    start() {
+    start () {
         const {start, elapsed} = this.state;
         let newStart = new Date().getTime();
         if (start !== null) {
@@ -51,7 +51,7 @@ class Stopwatch extends Component {
     reset() {
         this.setState({
             status: 'stopped',
-            start: null,
+            start: 0,
             elapsed: 0,
             lastItem: 0,
             lapTimes: [],
@@ -60,28 +60,22 @@ class Stopwatch extends Component {
         });
     }
     lap() {
-        const {start, status, timeArray, currentLap} = this.state;
+        const {start, status, timeArray, lastItem, lastTimeStamp} = this.state;
+        const currentTime = new Date().getTime();
         if (status !== 'running') {
             return;
         }
-        let lastLap = new Date().getTime();
-        if (this.state.lapTimes.length >= 1 && this.state.lapTimes !== []) {
-            let currentTime = new Date().getTime() - this.state.lastItem;
-            this.state.lastItem = currentTime;
-            this.state.lapTimes.push(currentTime);
+        if (timeArray.length >= 1 && timeArray !== []) {
+            this.setState({
+                lapTimes: timeArray.push(currentTime - lastTimeStamp),
+                lastTimeStamp: currentTime
+            });
         } else {
-            this.state.lapTimes[0] = (lastLap - start);
-            this.state.lastItem = this.state.lapTimes[0];
-        }
-        this.setState({
-            lastItem: lastLap,
-            numberOfLaps: this.state.numberOfLaps + 1,
-            currentLap: this.state.lapTimes[this.state.lapTimes.length-1]
-        });
-        if (timeArray[0] === null) {
-            timeArray[0] = this.state.currentLap;
-        } else {
-            timeArray.push(currentLap);
+            this.setState({
+                lastItem: currentTime - start,
+                lapTimes: timeArray.push(currentTime - start),
+                lastTimeStamp: currentTime
+            });
         }
     }
     render() {
