@@ -12,7 +12,6 @@ class App extends Component {
         this.addContact = this.addContact.bind(this);
     }
     addContact(contact) {
-        console.log("App: addComponent:", contact);
         this.setState({
            contacts: [contact, ...this.state.contacts]
         });
