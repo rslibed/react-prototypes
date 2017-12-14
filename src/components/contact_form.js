@@ -91,8 +91,10 @@ class ContactForm extends Component {
                 <Field name="city" label="City" type="text" value={city} onChange={this.handleInputChange}/>
                 <Field name="state" label="State" type="text" value={state} onChange={this.handleInputChange}/>
                 <Field name="zip" label="Zip Code" type="text" value={zip} onChange={this.handleInputChange}/>
-                <button className="btn btn-success">Add Contact</button>
-                <button className="mx-3 btn btn-danger" type="button" onClick={this.reset}>Clear Form</button>
+                <div className="col-12">
+                <button className="btn btn-success mx-3 col-5">Add Contact</button>
+                <button className="btn btn-danger col-5" type="button" onClick={this.reset}>Clear Form</button>
+                </div>
             </form>
         )
     }
