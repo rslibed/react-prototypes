@@ -14,6 +14,16 @@ function Nav () {
                     Our Macarons
                 </Link>
             </li>
+            <li className="nav-item">
+                <Link to="/gifts-and-parties" className="nav-link">
+                    Gifts &amp; Parties
+                </Link>
+            </li>
+            <li className="nav-item">
+                <Link to="/contact" className="nav-link">
+                    Contact
+                </Link>
+            </li>
         </ul>
     );
 }
